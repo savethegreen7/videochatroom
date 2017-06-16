@@ -13,6 +13,10 @@
 	import ChatterWindow from '../components/ChatterWindow.vue'
 	import CenterWindow from '../components/CenterWindow.vue'
 
+    //与服务器建立连接
+    socketBus.open('connect', function(){
+
+    })
 	export default {
 		name: 'chatterroom',
 		components: {
