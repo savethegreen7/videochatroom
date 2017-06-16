@@ -9,7 +9,24 @@
 
 <script>
     var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia ||navigator.mozGetUserMedia || navigator.msGetUserMedia);
+    var PeerConnection = (window.PeerConnection || window.webkitPeerConnection00 ||window.webkitRTCPeerConnection || window.mozRTCPeerConnection);
+	var URL = (window.URL || window.webkitURL || window.msURL || window.oURL);
+	var nativeRTCIceCandidate = (window.mozRTCIceCandidate || window.RTCIceCandidate);
+    var nativeRTCSessionDescription = (window.mozRTCSessionDescription || windowRTCSessionDescription); 
+    var moz = !!navigator.mozGetUserMedia;
+    var packetSize = 1000;
 
+    //发送ICE候选到其他客户端
+    pc.onicecandidate = function(event){
+    	socketBus.send(JSON.stringify({
+    		socket.sned(JSON.stringify({
+    			"event": "__ice_candidate",
+    			"data": {
+    				"candidate": event.candidate
+    			}
+    		}))
+    	}))
+    }
 	export default {
 		name: 'ChatterWindow',
 		props: [ 'chatter', 'layout', 'socketBus' ],
